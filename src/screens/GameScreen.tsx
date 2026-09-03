@@ -181,17 +181,16 @@ export function GameScreen({ onHome }: GameScreenProps) {
       </header>
 
       <main className="game-table">
-        <PlayerArea
-          name="Bot 2"
-          cardCount={viewState.opponents[1]?.cards.length || 7}
-          isCurrentPlayer={viewState.currentPlayerId === viewState.opponents[1]?.id}
-        />
-
-        <div className="side-players">
+        <div className="opponents-top">
           <PlayerArea
             name="Bot 1"
             cardCount={viewState.opponents[0]?.cards.length || 7}
             isCurrentPlayer={viewState.currentPlayerId === viewState.opponents[0]?.id}
+          />
+          <PlayerArea
+            name="Bot 2"
+            cardCount={viewState.opponents[1]?.cards.length || 7}
+            isCurrentPlayer={viewState.currentPlayerId === viewState.opponents[1]?.id}
           />
           <PlayerArea
             name="Bot 3"

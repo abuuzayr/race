@@ -72,6 +72,7 @@ export function getViewState(state: GameState, viewerId: PlayerId): GameViewStat
   const opponents = state.players.filter(p => p.id !== viewerId);
   const currentPlayer = state.players[state.currentPlayerIndex];
   const isCurrentPlayer = currentPlayer.id === viewerId;
+  const isActivePhase = state.phase === 'playing' || state.phase === 'kopek';
 
   return {
     player,
@@ -80,8 +81,8 @@ export function getViewState(state: GameState, viewerId: PlayerId): GameViewStat
     discardTop: state.discardPile[state.discardPile.length - 1] || null,
     stockCount: state.stock.length,
     phase: state.phase,
-    canDraw: isCurrentPlayer && state.phase === 'playing' && !player.cards.some(c => c.id === 'pending'),
-    canMakan: isCurrentPlayer && state.phase === 'playing' && state.discardPile.length > 0,
+    canDraw: isCurrentPlayer && isActivePhase && player.cards.length === 7 && state.stock.length > 0,
+    canMakan: isCurrentPlayer && isActivePhase && player.cards.length === 7 && state.discardPile.length > 0,
     mustDiscard: isCurrentPlayer && player.cards.length === 8,
     winner: state.winner,
     winningHand: state.winningHand,

@@ -52,19 +52,26 @@ export class LocalGameTransport implements GameTransport {
     while (this.state.phase === 'playing' || this.state.phase === 'kopek') {
       const currentPlayer = this.state.players[this.state.currentPlayerIndex];
 
-      if (currentPlayer.isBot) {
-        const bot = this.bots.get(currentPlayer.id);
-        if (bot) {
-          await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 500));
-          const decision = bot(this.state);
-          this.state = applyAction(this.state, decision.action);
-          this.notifyListeners();
-        } else {
-          break;
-        }
-      } else {
+      if (!currentPlayer.isBot) {
         break;
       }
+
+      const bot = this.bots.get(currentPlayer.id);
+      if (!bot) {
+        break;
+      }
+
+      const previousState = JSON.stringify(this.state);
+      await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 500));
+      const decision = bot(this.state);
+      const newState = applyAction(this.state, decision.action);
+
+      if (JSON.stringify(newState) === previousState) {
+        break;
+      }
+
+      this.state = newState;
+      this.notifyListeners();
     }
 
     this.isProcessing = false;

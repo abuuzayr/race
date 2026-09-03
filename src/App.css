@@ -191,26 +191,35 @@ button:disabled {
 
 .game-table {
   flex: 1;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
+  min-height: 0;
+}
+
+.opponents-top {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  padding: 4px 0;
 }
 
 .player-area {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 12px;
+  gap: 6px;
+  padding: 10px;
   background: var(--card-bg);
   border-radius: 12px;
   border: 1px solid var(--border);
   box-shadow: 0 2px 8px var(--shadow);
   transition: all 0.2s ease;
+  flex: 1;
+  min-width: 0;
 }
 
 .player-area.current {
@@ -220,7 +229,7 @@ button:disabled {
 
 .player-name {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -238,13 +247,13 @@ button:disabled {
 
 .player-cards {
   display: flex;
-  gap: -8px;
+  gap: -6px;
 }
 
 .opponent-card {
-  width: 44px;
-  height: 62px;
-  margin-left: -10px;
+  width: 40px;
+  height: 56px;
+  margin-left: -8px;
 }
 
 .opponent-card:first-child {
@@ -252,15 +261,8 @@ button:disabled {
 }
 
 .player-card-count {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
-}
-
-.side-players {
-  grid-row: 1 / 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .center-area {
@@ -268,7 +270,9 @@ button:disabled {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
+  flex: 1;
+  min-height: 120px;
 }
 
 .discard-pile {
@@ -361,12 +365,12 @@ button:disabled {
 }
 
 .player-area-bottom {
-  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   padding: 8px 0;
+  width: 100%;
 }
 
 .hand {
@@ -878,58 +882,93 @@ dd {
   }
 
   .game-table {
-    padding: 12px;
-    gap: 8px;
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .opponents-top {
+    gap: 4px;
   }
 
   .player-area {
-    padding: 8px;
+    padding: 6px;
+    gap: 4px;
   }
 
-  .opponent-card {
-    width: 36px;
-    height: 50px;
-  }
-
-  .card, .card-back {
-    width: 60px;
-    height: 85px;
-  }
-
-  .card-center {
-    font-size: 2rem;
-  }
-
-  .card-corner {
+  .player-name {
     font-size: 0.75rem;
   }
 
+  .opponent-card {
+    width: 32px;
+    height: 45px;
+  }
+
+  .card, .card-back {
+    width: 56px;
+    height: 80px;
+  }
+
+  .card-center {
+    font-size: 1.8rem;
+  }
+
+  .card-corner {
+    font-size: 0.7rem;
+  }
+
+  .hand {
+    gap: 6px;
+  }
+
   .action-row .btn {
-    padding: 14px 16px;
-    font-size: 0.9rem;
+    padding: 12px 14px;
+    font-size: 0.85rem;
   }
 
   .result-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .center-area {
+    gap: 8px;
+    min-height: 100px;
+  }
+
+  .discard-empty {
+    width: 72px;
+    height: 100px;
+  }
+
+  .stock-count {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 360px) {
   .card, .card-back {
-    width: 54px;
-    height: 76px;
+    width: 50px;
+    height: 70px;
   }
 
   .hand {
-    gap: 4px;
+    gap: 3px;
   }
 
   .opponent-card {
-    width: 32px;
-    height: 44px;
+    width: 28px;
+    height: 38px;
+  }
+
+  .opponents-top {
+    gap: 2px;
+  }
+
+  .player-area {
+    padding: 4px;
   }
 }

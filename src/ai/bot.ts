@@ -48,8 +48,9 @@ function chooseDrawOrMakan(
   state: GameState,
   difficulty: BotDifficulty
 ): BotDecision {
-  const canMakan = state.discardPile.length > 0;
+  const canMakan = state.discardPile.length > 0 && player.cards.length === 7;
   const topDiscard = state.discardPile[state.discardPile.length - 1];
+  const canDraw = state.stock.length > 0 && player.cards.length === 7;
 
   if (canMakan && topDiscard) {
     const testHand = [...player.cards, topDiscard];
@@ -90,7 +91,11 @@ function chooseDrawOrMakan(
     }
   }
 
-  return { action: { type: 'DRAW_STOCK', playerId: player.id }, reasoning: 'Draw from stock' };
+  if (canDraw) {
+    return { action: { type: 'DRAW_STOCK', playerId: player.id }, reasoning: 'Draw from stock' };
+  }
+
+  return { action: { type: 'DRAW_STOCK', playerId: player.id }, reasoning: 'No valid action' };
 }
 
 function chooseDiscard(
