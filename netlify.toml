@@ -23,8 +23,13 @@
   status = 200
 
 [[redirects]]
-  from = "/icon-*.svg"
-  to = "/icon-:splat"
+  from = "/icon-192.svg"
+  to = "/icon-192.svg"
+  status = 200
+
+[[redirects]]
+  from = "/icon-512.svg"
+  to = "/icon-512.svg"
   status = 200
 
 [[redirects]]
