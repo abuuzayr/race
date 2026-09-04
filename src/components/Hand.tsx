@@ -41,13 +41,14 @@ export function Hand({
 
   return (
     <div className={`hand ${className}`} role="list" aria-label="Your hand">
-      {sortedCards.map((card) => (
+      {sortedCards.map((card, index) => (
         <CardComponent
           key={card.id}
           card={card}
           faceUp={true}
           selected={selectedCard?.id === card.id && canSelect}
           onClick={() => canSelect && onCardClick(card)}
+          className={index === sortedCards.length - 1 ? 'last-card' : ''}
         />
       ))}
     </div>

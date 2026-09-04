@@ -25,9 +25,9 @@ export function PlayerArea({
         {isCurrentPlayer && <span className="turn-indicator" aria-live="polite">▶</span>}
       </div>
       <div className="player-cards" role="img" aria-label={`${cardCount} cards`}>
-        {Array.from({ length: Math.min(cardCount, 7) }, (_, i) => (
-          <CardBack key={i} className="opponent-card" />
-        ))}
+        <CardBack className="opponent-card-stack" />
+        {cardCount > 1 && <CardBack className="opponent-card-stack offset-1" />}
+        {cardCount > 2 && <CardBack className="opponent-card-stack offset-2" />}
       </div>
       <div className="player-card-count">{cardCount} cards</div>
     </div>

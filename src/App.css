@@ -247,17 +247,29 @@ button:disabled {
 
 .player-cards {
   display: flex;
-  gap: -6px;
+  align-items: center;
+  justify-content: center;
+  min-height: 70px;
 }
 
-.opponent-card {
-  width: 40px;
-  height: 56px;
-  margin-left: -8px;
+.opponent-card-stack {
+  width: 44px;
+  height: 62px;
+  margin-left: -12px;
+  z-index: 1;
 }
 
-.opponent-card:first-child {
+.opponent-card-stack:first-child {
   margin-left: 0;
+  z-index: 3;
+}
+
+.opponent-card-stack.offset-1 {
+  z-index: 2;
+}
+
+.opponent-card-stack.offset-2 {
+  z-index: 1;
 }
 
 .player-card-count {
@@ -375,10 +387,16 @@ button:disabled {
 
 .hand {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
-  padding: 8px;
+  padding: 8px 16px;
   min-height: 140px;
   align-items: flex-end;
+}
+
+.hand .last-card {
+  margin-right: 0;
 }
 
 .card {
@@ -390,15 +408,14 @@ button:disabled {
   box-shadow: 0 2px 8px var(--shadow);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 8px 6px;
+  padding: 10px 8px;
   position: relative;
   transition: all 0.15s ease;
   user-select: none;
 }
 
 .card.red .card-suit {
-  color: #d00;
+  color: #c00;
 }
 
 .card.black .card-suit {
@@ -415,7 +432,7 @@ button:disabled {
   display: flex;
   flex-direction: column;
   line-height: 1;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
 }
 
 .card-corner.flipped {
@@ -425,10 +442,12 @@ button:disabled {
 
 .card-rank {
   font-weight: 700;
+  line-height: 0.9;
 }
 
 .card-suit {
   font-size: 1rem;
+  line-height: 1;
 }
 
 .card-center {
@@ -436,8 +455,15 @@ button:disabled {
   align-items: center;
   justify-content: center;
   flex: 1;
-  font-size: 2.5rem;
-  opacity: 0.9;
+  font-size: 2.2rem;
+  opacity: 0.85;
+}
+
+.card-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
 }
 
 .card-back {
@@ -457,16 +483,16 @@ button:disabled {
 
 .card-back-pattern {
   font-weight: 700;
-  font-size: 1.2rem;
-  letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.3);
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.25);
   text-transform: uppercase;
 }
 
 .card-back::before {
   content: '';
   position: absolute;
-  inset: 8px;
+  inset: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   pointer-events: none;
@@ -918,16 +944,15 @@ dd {
   }
 
   .hand {
-    gap: 4px;
-    overflow-x: auto;
-    padding-bottom: 8px;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-x: visible;
+    padding: 8px;
   }
 
   .hand > * {
-    scroll-snap-align: center;
-    flex-shrink: 0;
+    flex-shrink: 1;
   }
 
   .action-row .btn {
@@ -965,12 +990,13 @@ dd {
   }
 
   .hand {
-    gap: 3px;
+    gap: 4px;
   }
 
-  .opponent-card {
+  .opponent-card-stack {
     width: 28px;
     height: 38px;
+    margin-left: -6px;
   }
 
   .opponents-top {

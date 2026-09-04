@@ -19,8 +19,8 @@ const suitSymbols: Record<Card['suit'], string> = {
 
 const suitColors: Record<Card['suit'], string> = {
   spades: '#000',
-  hearts: '#d00',
-  diamonds: '#d00',
+  hearts: '#c00',
+  diamonds: '#c00',
   clubs: '#000',
 };
 
@@ -57,23 +57,25 @@ export function CardComponent({
       style={{
         transform: selected ? 'translateY(-8px)' : 'none',
         transition: 'transform 0.15s ease',
-        borderColor: selected ? '#ffd700' : '#ccc',
-        boxShadow: selected ? '0 8px 24px rgba(255, 215, 0, 0.4)' : '0 2px 8px rgba(0,0,0,0.15)',
+        borderColor: selected ? '#ffd700' : 'var(--border)',
+        boxShadow: selected ? '0 8px 24px rgba(255, 215, 0, 0.4)' : '0 2px 8px var(--shadow)',
       }}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick?.(); } }}
     >
-      <div className="card-corner">
-        <span className="card-rank" style={{ color: suitColor }}>{card.rank}</span>
-        <span className="card-suit" style={{ color: suitColor }}>{suitSymbol}</span>
-      </div>
-      <div className="card-center" style={{ color: suitColor }}>
-        {suitSymbol}
-      </div>
-      <div className="card-corner flipped">
-        <span className="card-suit" style={{ color: suitColor }}>{suitSymbol}</span>
-        <span className="card-rank" style={{ color: suitColor }}>{card.rank}</span>
+      <div className="card-inner">
+        <div className="card-corner">
+          <span className="card-rank" style={{ color: suitColor }}>{card.rank}</span>
+          <span className="card-suit" style={{ color: suitColor }}>{suitSymbol}</span>
+        </div>
+        <div className="card-center" style={{ color: suitColor }}>
+          {suitSymbol}
+        </div>
+        <div className="card-corner flipped">
+          <span className="card-suit" style={{ color: suitColor }}>{suitSymbol}</span>
+          <span className="card-rank" style={{ color: suitColor }}>{card.rank}</span>
+        </div>
       </div>
     </div>
   );
