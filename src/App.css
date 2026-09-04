@@ -905,20 +905,29 @@ dd {
   }
 
   .card, .card-back {
-    width: 56px;
-    height: 80px;
+    width: 52px;
+    height: 74px;
   }
 
   .card-center {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
   .card-corner {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
 
   .hand {
-    gap: 6px;
+    gap: 4px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  .hand > * {
+    scroll-snap-align: center;
+    flex-shrink: 0;
   }
 
   .action-row .btn {

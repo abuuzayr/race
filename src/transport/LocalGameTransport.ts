@@ -11,22 +11,27 @@ export class LocalGameTransport implements GameTransport {
   private playerId: PlayerId;
   private bots: Map<PlayerId, (state: GameState) => { action: GameAction; reasoning: string }> = new Map();
   private isProcessing: boolean = false;
+  private difficulty: 'easy' | 'normal' | 'hard';
 
   constructor(difficulty: 'easy' | 'normal' | 'hard' = 'normal') {
     this.state = createInitialState(malaysiaStandard);
     this.playerId = 'player_0';
-
-    for (const player of this.state.players) {
-      if (player.isBot) {
-        this.bots.set(player.id, createBot(difficulty, player.id));
-      }
-    }
+    this.difficulty = difficulty;
 
     this.startGame();
+    this.ensureBots();
   }
 
   private startGame() {
     this.dispatch({ type: 'START_GAME' });
+  }
+
+  private ensureBots() {
+    for (const player of this.state.players) {
+      if (player.isBot && !this.bots.has(player.id)) {
+        this.bots.set(player.id, createBot(this.difficulty, player.id));
+      }
+    }
   }
 
   getState(): GameViewState {
